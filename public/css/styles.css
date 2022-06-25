@@ -1,0 +1,99 @@
+
+#title{
+    padding-top:1rem;
+}
+.navbar-end{
+    text-align: center;
+}
+.navbar-brand{
+    margin-top: 2.5rem;
+}
+.navbar-brand a:hover{
+    color:#4a4a4a;
+}
+.navbar-burger{
+    margin-top:1.25rem;
+}
+
+.line{
+    color:#485fc7;
+    margin:2rem 25rem;
+}
+.about-section{
+    padding-top:2rem;
+}
+.about-arrow-icon{
+    color:#485fc7;
+}
+.about-title{
+    font-size: 3rem;
+    letter-spacing: 2px;
+    font-weight:500;
+    margin:1rem 0;
+}
+
+.about-content{
+    padding:2rem 0;
+    margin:0 18rem;
+}
+
+.about-title-image{
+    height:150px;
+    width:150px;
+    margin:1rem 0 0;
+}
+
+.contact-icon{
+    margin:2rem 0.75rem 4rem;
+    color:#485fc7;
+    padding: 12px;
+    font-size: 1.25rem;
+    text-align: center;
+}
+.contact-icon:hover{
+    color:#485fc7;
+    border-bottom: solid 3px #afecf9;
+}
+.icon-link:hover{
+    color:#485fc7;
+}
+.font-source-serif{
+    font-family: 'Source Serif Pro', serif;
+}
+
+.font-roboto{
+    font-family: 'Roboto', sans-serif;
+}
+
+/* add book */
+.add-book-section{
+    padding-top: 0;
+    padding-bottom:0;
+}
+.add-book-cross{
+    text-align: right;
+}
+.notification{
+    position:relative;
+}
+.search-div-cross{
+    text-align: right;
+}
+.search-div-heading{
+    position:absolute;
+    top:0.25rem;
+}
+
+
+/* card content */
+
+.book-name{
+    font-size:110%;
+    font-weight: 600;
+}
+.book-author{
+    font-size:100%;
+}
+.book-year{
+    font-size:100%;
+}

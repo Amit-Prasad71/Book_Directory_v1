@@ -1,0 +1,217 @@
+<%- include('header'); -%> 
+
+<section id="title" class="section">
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand level">
+      <a class="navbar-item level-left title is-size-1" href="/">
+			BookLib
+		<ion-icon name="library-outline" class="is-size-2 ml-2"></ion-icon>
+      </a>
+	  
+
+      <a role="button" class="navbar-burger level-right" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu">
+      <div class="navbar-start"> </div>
+
+      <div class="navbar-end">
+			<div class="navbar-item">
+				<div class="level-item">
+					<form action="/findBook" method="post" class="field has-addons" id="searchForm">
+							<p class="control">
+								<input class="input" type="text" name="query" value="" id="searchField" placeholder="Find a book" autocomplete="off">
+							</p>
+							<p class="control">
+								<button type="submit" class="button">
+									<i class='bx bx-search bx-sm' ></i>
+								</button>
+							</p>
+					</form>
+				</div>
+			</div>
+
+			<div class="navbar-item">
+					<a class="button is-link" href="about">
+					<strong>About</strong>
+					</a>
+			</div>
+			<div class="navbar-item">
+				<button class="button is-link" id="add-book-btn">
+					<strong>Add Book</strong>
+				</button>
+			</div>
+		</div>
+    </div>
+  </nav>
+
+
+</section>
+
+<section class="section add-book-section">
+
+
+	<div class="is-hidden" id="add-book-div">
+
+	
+		<form class="box" action="/addBook" method="post">
+			<p class="add-book-cross">
+				<button class="button is-white" id="add-book-div-cross" type="button"> <i class='bx bx-x bx-sm'></i></button>
+			</p>
+			<div class="field">
+			<label class="label">Name</label>
+			<div class="control">
+				<input class="input" name="name" type="text" placeholder="e.g. Harry Potter" autocomplete="off">
+			</div>
+			</div>
+	
+			<div class="field">
+				<label class="label">Author</label>
+				<div class="control">
+				<input class="input" name="author" type="text" placeholder="e.g. JK Rowling" autocomplete="off">
+				</div>
+			</div>
+	
+			<div class="field">
+				<label class="label">Year</label>
+				<div class="control">
+				<input class="input" name="year" type="text" placeholder="e.g. 1998" autocomplete="off">
+				</div>
+			</div>
+		
+		
+			<button type="submit" class="button is-link">Add Book</button>
+		</form>
+	</div>
+
+
+
+
+	<div class="is-hidden mt-4 bookFoundDiv">
+		<div class="notification is-primary py-2">
+			<p class="search-div-cross">
+				<button class="button icon is-primary" id="found-div-cross"> <i class='bx bx-x bx-sm'></i></button>
+			</p>
+			<strong class="is-size-5 search-div-heading">Book found!</strong>
+		</div>
+		<div class="box is-size-6 has-text-weight-semibold">
+			<p class="my-1">Name: <span id="found-name" class="has-text-weight-normal">Alice</span></p>
+			<p class="my-1">Author: <span id="found-author" class="has-text-weight-normal">Lewis</span></p>
+			<p class="my-1">Year: <span id="found-year" class="has-text-weight-normal">2000</span></p>
+
+			<div class="searchBtns mt-3">
+				<button class="button is-primary is-light is-small mr-1 search-modify"><i class='bx bxs-pencil bx-xs'></i></button>
+				<button class="button is-danger is-light is-small search-delete" type="submit"><i class='bx bxs-trash-alt bx-xs'></i> </button>
+			</div>
+		</div>
+	</div>
+
+	<div class="is-hidden mt-4" id="bookNotFoundDiv">
+		<div class="notification is-danger py-2">
+			<p class="search-div-cross">
+				<button class="button icon is-danger" id="not-found-div-cross"> <i class='bx bx-x bx-sm'></i></button>
+			</p>
+			<strong class="is-size-5 search-div-heading">Book not found!</strong>
+		</div>
+	</div>
+
+</section>
+
+<section class="section">
+	<h1 class="is-size-3 px-4 my-3">Recently added...</h1>
+	<% if(bookList.length === 0){ %>
+		<div class="px-4">
+				<h2 class="is-size-5"> <em>No books to show!</em> </h2>
+		</div>
+	<% } %>
+	<div class="columns is-desktop">
+		<% for(var i=bookList.length-1;i>=bookList.length-4;i--){ %>
+			<% if(i===-1){ %>
+				<% break;%>
+			<% } %> 
+			<div class="column is-one-quarter-desktop">
+				<div class="card">	
+					<div class="card-content">
+						<div>
+							<h2 class="book-name"> <%= bookList[i].name %>  </h2>
+							<h2 class="book-author"><em> <%= bookList[i].author %>  </em></h2>
+							<h2 class="book-year"> <%= bookList[i].year %> </h2>
+							
+						</div>
+
+						<div class="mt-2">
+							<button class="button is-primary is-light is-small mr-1 modify-btns" id="modifyBtn<%= i %>"><i class='bx bxs-pencil bx-xs'></i></button>
+							<button class="button is-danger is-light is-small delete-btns" type="submit" id="deleteBtn<%= i %>"><i class='bx bxs-trash-alt bx-xs' ></i> </button>
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+		<%  } %>
+	</div>
+
+	<% if(bookList.length != 0){ %>
+		<div class="has-text-centered">
+			<a href="/allBooks" class="button is-link"  >See All</a>
+		</div>
+	<% } %>
+
+	<!-- modify modal -->
+
+	<div class="modal" id="modifyDiv">
+			
+		<div class="modal-background"></div>
+		<div class="modal-card">
+			<div class="modal-card-head">
+				<p class="modal-card-title"></p>
+				<button class="delete" id="modify-div-cross" aria-label="close"></button>
+			</div>
+		
+			
+			<form id="modifyForm" action="/" method="post">
+			
+				<div class="modal-card-body">
+					<div class="field">
+					<label class="label">New Name</label>
+					<div class="control">
+						<input class="input" name="name" type="text" value="" placeholder="e.g. Harry Potter" autocomplete="off">
+					</div>
+					</div>
+			
+					<div class="field">
+						<label class="label">New Author</label>
+						<div class="control">
+						<input class="input" name="author" type="text"  value="" placeholder="e.g. JK Rowling" autocomplete="off">
+						</div>
+					</div>
+			
+					<div class="field">
+						<label class="label">New Year</label>
+						<div class="control">
+						<input class="input" name="year" type="text"  value="" placeholder="e.g. 1998" autocomplete="off">
+						</div>
+					</div>
+				</div>
+			
+				<div class="modal-card-foot">
+					<button type="submit" class="button is-link">Update</button>
+				</div>
+				
+			</form>
+
+		</div>
+
+	</div>
+
+</section>
+
+
+<!-- custom scripts -->
+<script src="scripts/client_home.js"></script>
+<%- include('footer'); -%> 
